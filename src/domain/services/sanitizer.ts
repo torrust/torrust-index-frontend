@@ -4,7 +4,7 @@ import { useRestApi } from "#imports";
 
 const rest = useRestApi().value;
 
-const allowedTags = ["h1", "h2", "h3", "h4", "h5", "h6", "em", "strong", "del", "a", "img", "ul", "ol", "li", "hr"];
+const allowedTags = ["h1", "h2", "h3", "h4", "h5", "h6", "em", "strong", "del", "a", "img", "ul", "ol", "li", "hr", "p"];
 const allowedImageExtensions = ["png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF"];
 
 export async function sanitize (html: string) {

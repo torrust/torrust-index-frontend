@@ -11,7 +11,7 @@
 
       <footer class="p-4 footer footer-center bg-base-300 text-base-content">
         <div>
-          <p><a href="https://torrust.com" class="link link-hover"> Powered by Torrust </a> ⚡ Copyright © 2023 (<a target="_blank" href="https://github.com/torrust/torrust-index/blob/develop/LICENSE" class="link link-hover">Frontend</a> and <a target="_blank" href="https://github.com/torrust/torrust-index/blob/develop/COPYRIGHT" class="link link-hover">Backend</a>)</p>
+          <p><a target="_blank" href="https://torrust.com" class="link link-hover"> Powered by Torrust </a> ⚡ <a target="_self" href="/license" class="link link-hover">Copyright © 2024</a></p>
         </div>
       </footer>
     </div>
