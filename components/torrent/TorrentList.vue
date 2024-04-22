@@ -41,7 +41,7 @@
         </div>
         <template v-if="isOpenList[index]">
           <div class="flex flex-row items-start justify-start w-full px-4 pt-2 pb-4 duration-1000 flex-nowrap">
-            <TorrentListTorrentDetails :info-hash="torrent.info_hash" />
+            <TorrentListTorrentDetails :description="torrent.description" />
           </div>
         </template>
       </a>
