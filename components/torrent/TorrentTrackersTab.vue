@@ -19,7 +19,6 @@
             <tr>
               <th />
               <th>tracker</th>
-              <th>seeders / leechers</th>
             </tr>
           </thead>
           <tbody>
@@ -27,7 +26,6 @@
               <tr>
                 <th>{{ index + 1 }}</th>
                 <td>{{ tracker }}</td>
-                <td />
               </tr>
             </template>
           </tbody>
