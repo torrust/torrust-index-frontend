@@ -12,7 +12,7 @@
       </button>
     </div>
     <template v-if="!collapsed">
-      <div class="flex flex-col w-full h-full p-6 grow bg-base-100 rounded-2xl break-words">
+      <div class="flex flex-col w-full h-full p-6 grow bg-base-100 rounded-2xl">
         <template v-if="torrent.encoding">
           <Markdown :source="torrent.encoding" />
         </template>
