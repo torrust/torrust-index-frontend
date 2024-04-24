@@ -12,9 +12,9 @@
       </button>
     </div>
     <template v-if="!collapsed">
-      <div class="flex flex-col w-full h-full p-6 grow bg-base-100 rounded-2xl">
+      <div class="flex flex-col w-full h-full p-6 grow bg-base-100 rounded-2xl break-words">
         <template v-if="torrent.creation_date">
-          {{ formattedDateFromTimestamp }}
+          <Markdown :source="formattedDateFromTimestamp" />
         </template>
         <template v-else>
           <span class="italic text-neutral-content">No creation date provided.</span>
