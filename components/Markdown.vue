@@ -1,6 +1,6 @@
 <template>
   <!-- eslint-disable vue/no-v-html -->
-  <div class="prose" v-html="sanitizedDescription" />
+  <div class="prose max-w-none text-justify word-wrap" v-html="sanitizedDescription" />
 </template>
 
 <script setup lang="ts">
@@ -44,5 +44,16 @@ async function sanitizeDescription () {
 </script>
 
 <style scoped>
+.word-wrap {
+  -ms-word-break: break-all;
+  word-break: break-all;
 
+  /* Non standard for webkit */
+  word-break: break-word;
+
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
 </style>
