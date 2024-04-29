@@ -6,7 +6,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "lint": "eslint --ext \".ts,.js,.vue\" .",
+    "lint": "eslint --ext \".ts,.js,.vue\" . --max-warnings=0" ,
     "lintfix": "eslint --fix --ext \".ts,.js,.vue\" .",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
