@@ -34,6 +34,7 @@
               <li v-if="user.admin" data-cy="admin-settings-link"><NuxtLink to="/admin/settings/backend">
                 Admin Settings
               </NuxtLink></li>
+              <li><a data-cy="help" href="https://torrust.github.io/torrust-index-gui-user-guide/" target="_blank">Help</a></li>
               <li><a data-cy="logout-link" @click="logoutUser()">Logout {{ user.username }}</a></li>
             </ul>
           </div>
