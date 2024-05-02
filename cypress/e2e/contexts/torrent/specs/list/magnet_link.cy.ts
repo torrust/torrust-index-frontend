@@ -27,8 +27,8 @@ describe("A guest user", () => {
 
   it("should be able get the a torrent magnet link from the torrents list", () => {
     // Get the magnet link
-    cy.get("[data-cy=\"torrent-list-magnet-link\"]").invoke("attr", "").then(() => {
-      expect().to.include(`magnet:?xt=urn:btih:${Cypress.env("infoHash")}`);
+    cy.get("[data-cy=\"torrent-list-magnet-link\"]").invoke("attr", "href").then((href) => {
+      expect(href).to.include(`magnet:?xt=urn:btih:${Cypress.env("infoHash")}`);
     });
   });
 
@@ -36,8 +36,8 @@ describe("A guest user", () => {
     // Sets the layout to "table"
     cy.get("[data-cy=\"torrents-table-layout-selector\"]").click();
     // Gets the magnet link
-    cy.get("[data-cy=\"torrent-table-magnet-link\"]").invoke("attr", "").then(() => {
-      expect().to.include(`magnet:?xt=urn:btih:${Cypress.env("infoHash")}`);
+    cy.get("[data-cy=\"torrent-table-magnet-link\"]").invoke("attr", "href").then((href) => {
+      expect(href).to.include(`magnet:?xt=urn:btih:${Cypress.env("infoHash")}`);
     });
   });
 });
