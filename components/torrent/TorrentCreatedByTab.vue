@@ -17,7 +17,7 @@
           <Markdown :source="torrent.created_by" />
         </template>
         <template v-else>
-          <span class="italic text-neutral-content">No created by field provided.</span>
+          <span class="prose italic">No created by field provided.</span>
         </template>
       </div>
     </template>
