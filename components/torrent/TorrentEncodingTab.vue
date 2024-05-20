@@ -17,7 +17,7 @@
           <Markdown :source="torrent.encoding" />
         </template>
         <template v-else>
-          <span class="italic text-neutral-content">No encoding provided.</span>
+          <span class="prose italic">No encoding provided.</span>
         </template>
       </div>
     </template>

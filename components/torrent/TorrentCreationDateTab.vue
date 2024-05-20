@@ -17,7 +17,7 @@
           <Markdown :source="formattedDateFromTimestamp" />
         </template>
         <template v-else>
-          <span class="italic text-neutral-content">No creation date provided.</span>
+          <span class="prose italic">No creation date provided.</span>
         </template>
       </div>
     </template>

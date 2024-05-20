@@ -17,7 +17,7 @@
           <Markdown :source="torrent.comment" />
         </template>
         <template v-else>
-          <span class="italic text-neutral-content">No comment provided.</span>
+          <span class="prose italic">No comment provided.</span>
         </template>
       </div>
     </template>

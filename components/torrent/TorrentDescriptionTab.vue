@@ -17,7 +17,7 @@
           <Markdown :source="torrent.description" />
         </template>
         <template v-else>
-          <span class="italic text-neutral-content">No description provided.</span>
+          <span class="prose italic">No description provided.</span>
         </template>
       </div>
     </template>
