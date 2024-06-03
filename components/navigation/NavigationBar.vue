@@ -34,6 +34,9 @@
               <li v-if="user.admin" data-cy="admin-settings-link"><NuxtLink to="/admin/settings/backend">
                 Admin Settings
               </NuxtLink></li>
+              <li data-cy="change-password-link"><NuxtLink :to="{ name: 'user-username', params: { username: user.username } }">
+                Change password
+              </NuxtLink></li>
               <li><a data-cy="help" href="https://torrust.github.io/torrust-index-gui-user-guide/" target="_blank">Help</a></li>
               <li><a data-cy="logout-link" @click="logoutUser()">Logout {{ user.username }}</a></li>
             </ul>
