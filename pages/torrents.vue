@@ -10,7 +10,8 @@
             :multiple="true"
             search
           />
-          <TorrustSelect v-model:selected="tagFilters"
+          <TorrustSelect
+            v-model:selected="tagFilters"
             :options="tags.map(entry => ({ name: entry.name, value: entry.name }))"
             :label="'Tags'"
             :multiple="true"
