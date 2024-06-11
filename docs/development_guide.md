@@ -106,48 +106,11 @@ Please refer to their respective documentation for more information.
 
 ## Run the tracker
 
-For the requirements please refer to the [Tracker documentation][tracker].
-
-```s
-git clone git@github.com:torrust/torrust-tracker.git
-cd torrust-tracker
-./contrib/dev-tools/init/install-local.sh
-cargo run
-```
-
-```s
-Loading default configuration file: `./share/default/config/tracker.development.sqlite3.toml` ...
-2023-11-29T16:27:04.662938414+00:00 [torrust_tracker::bootstrap::logging][INFO] logging initialized.
-2023-11-29T16:27:04.667771053+00:00 [torrust_tracker::bootstrap::jobs::tracker_apis][INFO] Starting Torrust APIs server on: http://127.0.0.1:1212
-2023-11-29T16:27:04.667933262+00:00 [torrust_tracker::bootstrap::jobs::tracker_apis][INFO] Torrust APIs server started
-2023-11-29T16:27:04.667946602+00:00 [torrust_tracker::bootstrap::jobs::health_check_api][INFO] Starting Health Check API server: http://127.0.0.1:1313
-2023-11-29T16:27:04.667998942+00:00 [torrust_tracker::servers::health_check_api::server][INFO] Health Check API server listening on http://127.0.0.1:1313
-2023-11-29T16:27:04.668007992+00:00 [torrust_tracker::bootstrap::jobs::health_check_api][INFO] Torrust Health Check API server started
-```
-
-Please refer to the [Tracker documentation][tracker] for more information.
+Please refer to the [Tracker documentation][tracker].
 
 ## Run the Index
 
-For the requirements please refer to the [Index documentation][index].
-
-```s
-git clone git@github.com:torrust/torrust-index.git
-cd torrust-index/
-./contrib/dev-tools/init/install-local.sh
-TORRUST_INDEX_API_CORS_PERMISSIVE=true cargo run
-```
-
-```s
-Loading default configuration file: `./share/default/config/index.development.sqlite3.toml` ...
-2023-11-29T16:32:56.657072410+00:00 [torrust_index::bootstrap::logging][INFO] logging initialized.
-...
-2023-11-29T16:32:56.811232959+00:00 [torrust_index::web::api::server][INFO] Starting API server with net config: 0.0.0.0:3001 ...
-2023-11-29T16:32:56.811209440+00:00 [torrust_index::console::tracker_statistics_importer][INFO] Tracker statistics importer launcher started
-2023-11-29T16:32:56.811322268+00:00 [torrust_index::web::api::server][INFO] API server listening on http://0.0.0.0:3001
-2023-11-29T16:32:56.811342498+00:00 [torrust_index::console::tracker_statistics_importer][INFO] Tracker statistics importer cronjob starting ...
-2023-11-29T16:32:56.811527765+00:00 [torrust_index::console::tracker_statistics_importer][INFO] Tracker statistics importer API server listening on http://127.0.0.1:3002
-```
+Please refer to the [Index documentation][index].
 
 By default, the Index API has the most restrictive CORS policy. This means that the Index GUI cannot access the Index API, because they are running on different ports. If you run the backend as it is, you will see the following error in the browser console.
 
@@ -156,8 +119,6 @@ Access to fetch at 'http://localhost:3001/v1/torrents?page_size=50&page=0&sort=U
 ```
 
 You need to enable the Cors layer with the permissive option setting the environment variable `TORRUST_INDEX_API_CORS_PERMISSIVE` to `true`.
-
-Please refer to the [Index documentation][index] for more information.
 
 ## Run the Index GUI
 
@@ -249,6 +210,13 @@ export default defineConfig({
         },
         addCategory: ({ name }) => {
           return addCategory(name, databaseConfig(config));
+        },
+        // Tag context
+        deleteTags: () => {
+          return deleteTags(databaseConfig(config));
+        },
+        addTag: ({ name }) => {
+          return addTag(name, databaseConfig(config));
         },
         // Torrent context
         deleteTorrent: ({ infohash }) => {
