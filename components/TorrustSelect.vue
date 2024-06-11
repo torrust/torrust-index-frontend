@@ -1,6 +1,8 @@
 <template>
   <div class="group dropdown" :class="dropdownAlignment">
-    <div tabindex="0" class="items-center duration-200 select select-bordered group-hover:border-amber-500" :class="{ 'h-[3.5rem]': !!label }">
+    <div tabindex="0"
+      class="items-center duration-200 select select-bordered group-hover:border-amber-500"
+      :class="{ 'h-[3.5rem]': !!label }">
       <div class="flex flex-col mr-1 text-left capitalize flex-nowrap">
         <span v-if="label" class="text-xs text-primary">{{ label }}</span>
         <div class="flex flex-row text-sm flex-nowrap">
@@ -10,48 +12,36 @@
         </div>
       </div>
     </div>
-    <div ref="dropdownContent" tabindex="0" class="flex flex-col gap-2 p-2 mt-3 border rounded-lg shadow dropdown-content border-base-content/20 bg-base-100 z-[1]">
+    <div ref="dropdownContent"
+      tabindex="0"
+      class="flex flex-col gap-2 p-2 mt-3 border rounded-lg shadow dropdown-content border-base-content/20 bg-base-100 z-[1]">
       <template v-if="props.search">
         <div class="">
-          <input
-            v-model="searchText"
+          <input v-model="searchText"
             class="text-sm border-2 input placeholder-base-content input-bordered rounded-2xl"
             placeholder="Search"
-            name="search"
-          >
+            name="search">
         </div>
       </template>
       <template v-if="filteredOptions().length > 0">
         <ul class="menu">
-          <li
-            v-for="(option) in filteredOptions()"
+          <li v-for="(option) in filteredOptions()"
             :key="option.value"
             class="text-sm text-base-content"
-            @click="toggleOption(option)"
-          >
+            @click="toggleOption(option)">
             <div class="flex flex-row w-full rounded-lg">
               <div class="font-bold text-neutral-content">
                 {{ option.name }}
               </div>
               <div v-if="props.multiple" class="flex flex-col items-center ml-auto">
-                <span
-                  v-if="isSelectedOption(option)"
-                  class="relative inline-flex"
-                >
-                  <input
-                    type="checkbox"
-                    class="w-6 h-6 border-2 rounded-md appearance-none bg-primary border-primary"
-                  >
-                  <CheckIcon
-                    class="absolute w-5 text-neutral-content"
-                    style="top: 50%;left: 50%;transform: translate(-50%, -50%);"
-                  />
+                <span v-if="isSelectedOption(option)" class="relative inline-flex">
+                  <input type="checkbox" class="w-6 h-6 border-2 rounded-md appearance-none bg-primary border-primary">
+                  <CheckIcon class="absolute w-5 text-neutral-content"
+                    style="top: 50%;left: 50%;transform: translate(-50%, -50%);" />
                 </span>
-                <input
-                  v-else
+                <input v-else
                   type="checkbox"
-                  class="w-6 h-6 duration-200 border-2 rounded-md appearance-none border-base-content/20"
-                >
+                  class="w-6 h-6 duration-200 border-2 rounded-md appearance-none border-base-content/20">
               </div>
             </div>
           </li>
@@ -179,6 +169,4 @@ const dropdownAlignment = computed(() => {
 
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

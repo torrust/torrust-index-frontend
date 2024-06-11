@@ -10,8 +10,7 @@
             :multiple="true"
             search
           />
-          <TorrustSelect
-            v-model:selected="tagFilters"
+          <TorrustSelect v-model:selected="tagFilters"
             :options="tags.map(entry => ({ name: entry.name, value: entry.name }))"
             :label="'Tags'"
             :multiple="true"
@@ -28,7 +27,12 @@
         <button class="tab" :class="{ 'tab-active': layout === 'default' }" @click="layout = 'default'">
           Default
         </button>
-        <button data-cy="torrents-table-layout-selector" class="tab" :class="{ 'tab-active': layout === 'table' }" @click="layout = 'table'">
+        <button
+          data-cy="torrents-table-layout-selector"
+          class="tab"
+          :class="{ 'tab-active': layout === 'table' }"
+          @click="layout = 'table'"
+        >
           Table
         </button>
       </div>
@@ -43,10 +47,16 @@
             <template v-else-if="layout === 'table'">
               <TorrentTable :torrents="torrents" />
             </template>
-            <Pagination v-model:current-page="currentPage" v-model:page-size="pageSize" :total-results="torrentsTotal" />
+            <Pagination
+              v-model:current-page="currentPage"
+              v-model:page-size="pageSize"
+              :total-results="torrentsTotal"
+            />
           </template>
           <template v-else>
-            <span data-cy="no-results-element" class="text-neutral-content">No results.</span>
+            <span data-cy="no-results-element" class="text-neutral-content flex items-center justify-center">
+              <img src="/spinner.gif" class="w-20 h-20" alt="Loading Spinner">
+            </span>
           </template>
         </div>
       </div>
@@ -154,6 +164,4 @@ function loadTorrents () {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
