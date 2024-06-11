@@ -1,0 +1,11 @@
+[tracker]
+url = "http://tracker:7070"
+mode = "Private"
+api_url = "http://tracker:1212"
+
+[database]
+connect_url = "sqlite:///var/lib/torrust/index/database/e2e_testing_sqlite3.db?mode=rwc"
+
+[mail]
+server = "mailcatcher"
+port = 1025

@@ -1,0 +1,8 @@
+mode = "private"
+db_path = "/var/lib/torrust/tracker/database/e2e_testing_sqlite3.db"
+
+[[udp_trackers]]
+enabled = false
+
+[http_api]
+bind_address = "0.0.0.0:1212"

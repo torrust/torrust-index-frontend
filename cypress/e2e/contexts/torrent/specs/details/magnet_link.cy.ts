@@ -23,7 +23,7 @@ describe("A guest user", () => {
       // Get the magnet link
       cy.get("[data-cy=\"torrent-action-magnet-link\"]").invoke("attr", "href").then((href) => {
         // cspell:disable-next-line
-        expect(href).to.include(`magnet:?xt=urn:btih:${infoHash}&dn=${torrent_info.title}&tr=udp`);
+        expect(href).to.include(`magnet:?xt=urn:btih:${infoHash}&dn=${torrent_info.title}`);
       });
 
       cy.delete_torrent_from_database_and_fixture(torrent_info, infoHash);
