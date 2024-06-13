@@ -5,10 +5,11 @@ export function isTrackerOpen (): boolean {
   const settings = useSettings();
 
   // todo: we are not using the type TrackerMode in
-  // settings.value.tracker_mode
+  // settings.value.tracker_mode.
+  // Depends on: https://github.com/torrust/torrust-index-types-lib/issues/18
 
-  return settings.value.tracker_mode === "Public" ||
-        settings.value.tracker_mode === "Whitelisted";
+  return settings.value.tracker_mode === "public" ||
+        settings.value.tracker_mode === "listed";
 }
 
 export function isTrackerClose (): boolean {

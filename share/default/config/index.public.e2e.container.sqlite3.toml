@@ -1,10 +1,10 @@
 [tracker]
-url = "udp://tracker:6969"
 api_url = "http://tracker:1212"
+url = "udp://tracker:6969"
 
 [database]
 connect_url = "sqlite:///var/lib/torrust/index/database/e2e_testing_sqlite3.db?mode=rwc"
 
 [mail]
-server = "mailcatcher"
 port = 1025
+server = "mailcatcher"
