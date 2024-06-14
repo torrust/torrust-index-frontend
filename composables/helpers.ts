@@ -1,15 +1,11 @@
-import { TorrentResponse, TrackerMode } from "torrust-index-types-lib";
+import { type TorrentResponse, TrackerMode, type PublicSettings } from "torrust-index-types-lib";
 import { useRestApi, useSettings, useUser } from "~/composables/states";
 
 export function isTrackerOpen (): boolean {
   const settings = useSettings();
 
-  // todo: we are not using the type TrackerMode in
-  // settings.value.tracker_mode.
-  // Depends on: https://github.com/torrust/torrust-index-types-lib/issues/18
-
-  return settings.value.tracker_mode === "public" ||
-        settings.value.tracker_mode === "listed";
+  return settings.value.tracker_mode === TrackerMode.Public ||
+        settings.value.tracker_mode === TrackerMode.Listed;
 }
 
 export function isTrackerClose (): boolean {

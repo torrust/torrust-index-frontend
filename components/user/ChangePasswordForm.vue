@@ -49,7 +49,7 @@
 <script setup lang="ts">
 import { type Ref } from "vue";
 import { notify } from "notiwind-ts";
-import { ref, useRestApi, useSettings } from "#imports";
+import { ref, useRestApi } from "#imports";
 
 const props = defineProps({
   username: {
@@ -67,7 +67,6 @@ type Form = {
 }
 
 const rest = useRestApi();
-const settings = useSettings();
 
 const form: Ref<Form> = ref({
   current_password: "",
