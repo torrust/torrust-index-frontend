@@ -9,7 +9,7 @@
         @submit.prevent="submit"
       >
         <FormInputText v-model="form.username" label="Username" name="username" data-cy="registration-form-username" required />
-        <template v-if="settings && settings.email_on_signup !== EmailOnSignup.None">
+        <template v-if="settings && settings.email_on_signup !== EmailOnSignup.Ignored">
           <FormInputText
             v-model="form.email"
             type="email"
@@ -58,7 +58,7 @@
 
 <script setup lang="ts">
 import { type Ref } from "vue";
-import { EmailOnSignup } from "torrust-index-types-lib";
+import { EmailOnSignup, type PublicSettings } from "torrust-index-types-lib";
 import { notify } from "notiwind-ts";
 import { ref, useRestApi, useSettings } from "#imports";
 
@@ -72,7 +72,7 @@ type Form = {
 }
 
 const rest = useRestApi();
-const settings = useSettings();
+const settings: PublicSettings = useSettings();
 
 const form: Ref<Form> = ref({
   username: "",

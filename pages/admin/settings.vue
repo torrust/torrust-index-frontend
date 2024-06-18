@@ -45,7 +45,6 @@ const tabs = [
 ];
 
 const rest = useRestApi();
-
 const settings: Ref<Settings> = ref(null);
 
 onMounted(() => {

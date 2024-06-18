@@ -96,11 +96,11 @@
 
 <script setup lang="ts">
 import { UserCircleIcon, Bars3Icon, MagnifyingGlassIcon } from "@heroicons/vue/24/solid";
-import { ChevronDownIcon } from "@heroicons/vue/20/solid";
 import { type Ref } from "vue";
+import { type PublicSettings } from "torrust-index-types-lib";
 import { ref, useSettings, useUser, logoutUser } from "#imports";
 
-const settings = useSettings();
+const settings: PublicSettings = useSettings().value;
 const user = useUser();
 
 const mobileCollapsed = ref(true);
