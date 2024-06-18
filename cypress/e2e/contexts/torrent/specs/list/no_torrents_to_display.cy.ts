@@ -7,6 +7,6 @@ describe("Users", () => {
   it("Should be able to see the list page when there are no torrents", () => {
     cy.visit("/torrents");
     cy.url().should("match", /\/torrents$/);
-    cy.get("[data-cy=\"no-results-element\"]").invoke("text").should("match", /No results./i);
+    cy.get("[data-cy=\"no-results-element\"] img").should("have.attr", "src", "/spinner.gif");
   });
 });
