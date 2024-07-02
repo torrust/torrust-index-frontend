@@ -1,5 +1,7 @@
+version = "2"
+
 [core]
-mode = "private"
+private = true
 
 [core.database]
 path = "/var/lib/torrust/tracker/database/e2e_testing_sqlite3.db"
