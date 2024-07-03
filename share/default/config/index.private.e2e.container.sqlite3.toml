@@ -1,6 +1,8 @@
+version = "2"
+
 [tracker]
 api_url = "http://tracker:1212"
-mode = "private"
+private = true
 url = "http://tracker:7070"
 
 [database]

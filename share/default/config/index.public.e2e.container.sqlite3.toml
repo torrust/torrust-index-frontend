@@ -1,5 +1,8 @@
+version = "2"
+
 [tracker]
 api_url = "http://tracker:1212"
+private = false
 url = "udp://tracker:6969"
 
 [database]
