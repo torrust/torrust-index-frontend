@@ -6,7 +6,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "lint": "eslint --ext \".ts,.js,.vue\" . --max-warnings=0" ,
+    "lint": "eslint --ext \".ts,.js,.vue\" . --max-warnings=0",
     "lintfix": "eslint --fix --ext \".ts,.js,.vue\" .",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
@@ -42,7 +42,7 @@
     "marked": "^12.0.2",
     "notiwind-ts": "^2.0.2",
     "torrust-index-api-lib": "^1.0.0-alpha.7",
-    "torrust-index-types-lib": "^3.0.0-alpha.1",
+    "torrust-index-types-lib": "^3.0.0-alpha.6",
     "uuid": "^9.0.1"
   }
 }
