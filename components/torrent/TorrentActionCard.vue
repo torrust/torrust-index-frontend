@@ -101,7 +101,7 @@
         <div class="flex flex-row gap-3">
           <template v-if="showDownloadButtons()">
             <button class="btn btn-primary grow" data-cy="torrent-action-download" @click="downloadTorrent(torrent.info_hash, torrent.name)">
-              download {{ isTrackerClose()? 'private' : '' }} torrent
+              download {{ isTrackerPrivate()? 'private' : '' }} torrent
             </button>
             <button class="w-12 p-0 btn btn-primary">
               <a data-cy="torrent-action-magnet-link" class="flex items-center" :href="torrent.magnet_link">
@@ -147,7 +147,7 @@ import {
   downloadTorrent,
   useRestApi,
   isUserLoggedIn,
-  isTrackerOpen, isTrackerClose, navigateTo
+  isTrackerPublic, navigateTo
 } from "#imports";
 import { canEditThisTorrent } from "~/composables/helpers";
 
@@ -170,7 +170,7 @@ function hasEditRights (): boolean {
 }
 
 function showDownloadButtons (): boolean {
-  return isUserLoggedIn() || isTrackerOpen();
+  return isUserLoggedIn() || isTrackerPublic();
 }
 
 function seedersPercentage () {

@@ -1,15 +1,13 @@
-import { type TorrentResponse, TrackerMode, type PublicSettings } from "torrust-index-types-lib";
+import { type TorrentResponse, type PublicSettings } from "torrust-index-types-lib";
 import { useRestApi, useSettings, useUser } from "~/composables/states";
 
-export function isTrackerOpen (): boolean {
-  const settings = useSettings();
-
-  return settings.value.tracker_mode === TrackerMode.Public ||
-        settings.value.tracker_mode === TrackerMode.Listed;
+export function isTrackerPublic (): boolean {
+  return !isTrackerPrivate();
 }
 
-export function isTrackerClose (): boolean {
-  return !isTrackerOpen();
+export function isTrackerPrivate (): boolean {
+  const settings = useSettings();
+  return settings.value.tracker_private === true;
 }
 
 export function isUserLoggedIn (): boolean {
