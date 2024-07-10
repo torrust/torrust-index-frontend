@@ -12,7 +12,7 @@
         <template v-if="settings && settings.email_on_signup !== EmailOnSignup.Ignored">
           <FormInputText
             v-model="form.email"
-            type="email"
+            :type="settings.email_on_signup === EmailOnSignup.Required || form.email !== '' ? 'email' : 'text'"
             label="Email"
             name="email"
             data-cy="registration-form-email"
