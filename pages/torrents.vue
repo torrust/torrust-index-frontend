@@ -3,6 +3,17 @@
     <div class="flex w-full">
       <div class="flex flex-wrap justify-between w-full gap-2">
         <div class="flex flex-wrap gap-2">
+          <input
+            v-model="searchQuery"
+            name="search"
+            type="text"
+            class="border-2 input input-bordered rounded-2xl placeholder-neutral-content"
+            :placeholder="`Search torrents`"
+            @keyup.enter="submitSearch"
+          >
+
+        </div>
+        <div class="flex flex-wrap gap-1">
           <TorrustSelect
             v-model:selected="categoryFilters"
             :options="categories.map(entry => ({ name: entry.name, value: entry.name }))"
@@ -17,8 +28,6 @@
             :multiple="true"
             search
           />
-        </div>
-        <div>
           <TorrustSelect v-model:selected="selectedSorting" class="ml-auto" :options="sortingOptions" label="Sort by" />
         </div>
       </div>
@@ -102,7 +111,13 @@ const selectedSorting = computed({
 });
 
 watch(() => route.fullPath, () => {
-  searchQuery.value = route.query.search as string;
+  searchQuery.value = route.query.search as string ?? null;
+  itemsSorting.value = route.query.sorting as string ?? null;
+  pageSize.value = route.query.pageSize as number ?? null;
+  currentPage.value = route.query.page as number ?? null;
+  layout.value = route.query.layout as string ?? null;
+  categoryFilters.value = route.query.categoryFilters as string[] ?? null;
+  tagFilters.value = route.query.tagFilters as string[] ?? null;
 });
 
 watch([searchQuery, itemsSorting, pageSize, currentPage, layout, categoryFilters, tagFilters], () => {
@@ -123,11 +138,33 @@ watch([searchQuery, itemsSorting, pageSize, currentPage, layout, categoryFilters
 
 onActivated(() => {
   searchQuery.value = route.query.search as string ?? null;
+  itemsSorting.value = route.query.sorting as string ?? null;
+  pageSize.value = route.query.pageSize as number ?? null;
+  currentPage.value = route.query.page as number ?? null;
+  layout.value = route.query.layout as string ?? null;
+  categoryFilters.value = route.query.categoryFilters as string[] ?? null;
+  tagFilters.value = route.query.tagFilters as string[] ?? null;
 });
 
 onMounted(() => {
+  searchQuery.value = route.query.search as string ?? null;
   loadTorrents();
 });
+
+function submitSearch () {
+  navigateTo({
+    path: "/torrents",
+    query: {
+      search: searchQuery.value,
+      sorting: itemsSorting.value,
+      pageSize: pageSize.value,
+      page: 1,
+      layout: layout.value,
+      categoryFilters: categoryFilters.value,
+      tagFilters: tagFilters.value
+    }
+  });
+}
 
 function loadTorrents () {
   rest.value.torrent.getTorrents(

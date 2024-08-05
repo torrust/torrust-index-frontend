@@ -7,18 +7,6 @@
       <NuxtLink to="/" class="flex flex-row text-xl normal-case btn btn-ghost">
         <span>{{ settings?.website_name || "Torrust" }}</span>
       </NuxtLink>
-      <div class="hidden form-control md:flex">
-        <input
-          v-model="searchQuery"
-          name="search"
-          type="text"
-          class="border-2 input input-bordered rounded-2xl placeholder-neutral-content"
-          :placeholder="`Search torrents`"
-          @keyup.enter="submitSearch"
-          @focusin="typingInSearch = true"
-          @focusout="typingInSearch = false"
-        >
-      </div>
       <div class="flex-none gap-2 ml-auto">
         <template v-if="user">
           <NuxtLink id="upload-button" to="/upload" class="hidden md:flex btn bg-base-100 rounded-2xl">
@@ -56,18 +44,6 @@
     <template v-if="!mobileCollapsed">
       <div class="items-center justify-between w-full py-4 md:hidden">
         <div class="flex flex-row gap-2">
-          <div class="w-full form-control">
-            <input
-              v-model="searchQuery"
-              name="search"
-              type="text"
-              class="border-2 input input-bordered"
-              :placeholder="`Search ${settings?.website_name ?? 'Torrust'}`"
-              @keyup.enter="submitSearch"
-              @focusin="typingInSearch = true"
-              @focusout="typingInSearch = false"
-            >
-          </div>
           <button class="btn btn-square btn-ghost" @click="submitSearch">
             <MagnifyingGlassIcon class="w-6" />
           </button>
@@ -104,17 +80,6 @@ const settings: PublicSettings = useSettings().value;
 const user = useUser();
 
 const mobileCollapsed = ref(true);
-const searchQuery: Ref<string> = ref("");
-const typingInSearch = ref(false);
-
-function submitSearch () {
-  navigateTo({
-    path: "/torrents",
-    query: {
-      search: searchQuery.value ?? null
-    }
-  });
-}
 
 </script>
 
