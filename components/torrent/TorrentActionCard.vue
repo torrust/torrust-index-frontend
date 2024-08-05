@@ -81,7 +81,8 @@
                 <span>File Size</span>
               </div>
               <div class="flex flex-row w-1/2">
-                <span>{{ fileSize(torrent.file_size) }}</span>
+                <span>{{ fileSizeDecimal(torrent.file_size) }}</span>/
+                <span>{{ fileSizeBinary(torrent.file_size) }}</span>
               </div>
             </div>
             <div class="flex flex-row py-2 pb-0">
@@ -143,7 +144,8 @@ import type { PropType } from "vue";
 import type { TorrentResponse } from "torrust-index-types-lib";
 import { notify } from "notiwind-ts";
 import {
-  fileSize,
+  fileSizeDecimal,
+  fileSizeBinary,
   downloadTorrent,
   useRestApi,
   isUserLoggedIn,

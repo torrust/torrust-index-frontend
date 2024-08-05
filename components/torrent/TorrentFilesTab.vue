@@ -28,7 +28,7 @@
               <tr>
                 <th>{{ index + 1 }}</th>
                 <td>{{ file.name }}</td>
-                <td>{{ fileSize(file.size) }}</td>
+                <td>{{ fileSizeDecimal(file.size) }}/{{ fileSizeBinary(file.size) }}</td>
               </tr>
             </template>
           </tbody>
@@ -42,7 +42,7 @@
 import { ChevronDownIcon } from "@heroicons/vue/24/solid";
 import type { PropType } from "vue";
 import type { TorrentResponse } from "torrust-index-types-lib";
-import { ref, fileSize } from "#imports";
+import { ref, fileSizeDecimal, fileSizeBinary } from "#imports";
 
 const collapsed = ref(false);
 

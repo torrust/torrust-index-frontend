@@ -19,7 +19,7 @@
               </template>
             </div>
             <div class="flex flex-row items-start justify-start w-full mt-1 flex-nowrap">
-              <span class="text-xs whitespace-nowrap text-neutral-content/50">{{ fileSize(torrent.file_size) }}</span>
+              <span class="text-xs whitespace-nowrap text-neutral-content/50">{{ fileSizeDecimal(torrent.file_size) }}/{{ fileSizeBinary(torrent.file_size) }}</span>
               <span class="ml-2 text-xs whitespace-nowrap text-neutral-content/50">{{ new Date(torrent.date_uploaded).toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }} ({{ timeSince(new Date(torrent.date_uploaded)) }} ago)</span>
               <a class="ml-2 text-xs whitespace-nowrap text-neutral-content/50">u/{{ torrent.uploader }}</a>
             </div>
@@ -58,7 +58,7 @@ import { ArrowDownTrayIcon, LinkIcon } from "@heroicons/vue/24/outline";
 import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/vue/20/solid";
 import { type PropType, watch } from "vue";
 import type { TorrentListing } from "torrust-index-types-lib";
-import { fileSize, timeSince, ref, downloadTorrent } from "#imports";
+import { fileSizeDecimal, fileSizeBinary, timeSince, ref, downloadTorrent } from "#imports";
 
 const props = defineProps({
   torrents: Array as PropType<Array<TorrentListing>>

@@ -40,13 +40,24 @@ export function downloadTorrent (infoHash: string, fileName?: string) {
     });
 }
 
-export function fileSize (size: number): string {
+export function fileSizeDecimal (size: number): string {
   if (!size) { size = 0; }
   let sizeString = `${(size).toFixed(2)} B`;
 
-  if (size / 1000000000 < 1000) { sizeString = `${(size / 1000000000).toFixed(2)} GB`; }
-  if (size / 1000000 < 1000) { sizeString = `${(size / 1000000).toFixed(2)} MB`; }
-  if (size / 1000 < 1000) { sizeString = `${(size / 1000).toFixed(2)} KB`; }
+  if (size / Math.pow(1000, 3) < 1000) { sizeString = `${(size / Math.pow(1000, 3)).toFixed(2)} GB`; }
+  if (size / Math.pow(1000, 2) < 1000) { sizeString = `${(size / Math.pow(1000, 2)).toFixed(2)} MB`; }
+  if (size / Math.pow(1000, 1) < 1000) { sizeString = `${(size / Math.pow(1000, 1)).toFixed(2)} KB`; }
+
+  return sizeString;
+}
+
+export function fileSizeBinary (size: number): string {
+  if (!size) { size = 0; }
+  let sizeString = `${(size).toFixed(2)} B`;
+
+  if (size / Math.pow(1024, 3) < 1024) { sizeString = `${(size / Math.pow(1024, 3)).toFixed(2)} GiB`; }
+  if (size / Math.pow(1024, 2) < 1024) { sizeString = `${(size / Math.pow(1024, 2)).toFixed(2)} MiB`; }
+  if (size / Math.pow(1024, 1) < 1024) { sizeString = `${(size / Math.pow(1024, 1)).toFixed(2)} KiB`; }
 
   return sizeString;
 }

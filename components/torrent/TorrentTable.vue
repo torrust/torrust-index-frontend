@@ -21,7 +21,7 @@
               <span class="duration-200 cursor-pointer hover:text-amber-500" @click.stop="$router.push(`/torrent/${torrent.info_hash}`)">{{ torrent.title }}</span>
             </td>
             <td class="px-2">
-              {{ fileSize(torrent.file_size) }}
+              {{ fileSizeDecimal(torrent.file_size) }}/{{ fileSizeBinary(torrent.file_size) }}
             </td>
             <td>{{ timeSince(new Date(torrent.date_uploaded)) }} ago ({{ new Date(torrent.date_uploaded).toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }})</td>
             <td>{{ torrent.uploader }}</td>
@@ -59,7 +59,7 @@
 import { ArrowDownTrayIcon, LinkIcon, EyeIcon } from "@heroicons/vue/24/outline";
 import { type PropType, watch } from "vue";
 import type { TorrentListing } from "torrust-index-types-lib";
-import { fileSize, timeSince, ref, downloadTorrent } from "#imports";
+import { fileSizeDecimal, fileSizeBinary, timeSince, ref, downloadTorrent } from "#imports";
 
 const props = defineProps({
   torrents: Array as PropType<Array<TorrentListing>>
