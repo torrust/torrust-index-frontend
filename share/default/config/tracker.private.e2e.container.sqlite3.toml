@@ -2,7 +2,12 @@
 schema_version = "2.0.0"
 
 [logging]
+#threshold = "off"
+#threshold = "error"
+#threshold = "warn"
 threshold = "info"
+#threshold = "debug"
+#threshold = "trace"
 
 [core]
 listed = false
