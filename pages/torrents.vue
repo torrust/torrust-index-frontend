@@ -112,10 +112,10 @@ const selectedSorting = computed({
 
 watch(() => route.fullPath, () => {
   searchQuery.value = route.query.search as string ?? null;
-  itemsSorting.value = route.query.sorting as string ?? null;
-  pageSize.value = isNaN(route.query.pageSize) ? parseInt(route.query.pageSize) : defaultPageSize;
-  currentPage.value = isNaN(route.query.page) ? parseInt(route.query.page) : 1;
-  layout.value = route.query.layout as string ?? null;
+  itemsSorting.value = route.query.sorting as string ?? sortingOptions[0].value;
+  pageSize.value = isNaN(route.query.pageSize) ? defaultPageSize : parseInt(route.query.pageSize);
+  currentPage.value = isNaN(route.query.page) ? 1 : parseInt(route.query.page);
+  layout.value = route.query.layout as string ?? "default";
 
   // Ensure categoryFilters is always an array of strings
   categoryFilters.value = Array.isArray(route.query.categoryFilters)
@@ -132,7 +132,7 @@ watch([searchQuery, itemsSorting, pageSize, currentPage, layout, categoryFilters
   router.push({
     query: {
       search: searchQuery.value,
-      sorting: itemsSorting.value,
+      sorting: itemsSorting.value ? itemsSorting.value : sortingOptions[0].value,
       pageSize: pageSize.value,
       page: currentPage.value,
       layout: layout.value,
@@ -146,10 +146,10 @@ watch([searchQuery, itemsSorting, pageSize, currentPage, layout, categoryFilters
 
 onActivated(() => {
   searchQuery.value = route.query.search as string ?? null;
-  itemsSorting.value = route.query.sorting as string ?? null;
+  itemsSorting.value = route.query.sorting as string ?? sortingOptions[0].value;
   pageSize.value = route.query.pageSize as number ?? defaultPageSize;
   currentPage.value = route.query.page as number ?? 1;
-  layout.value = route.query.layout as string ?? null;
+  layout.value = route.query.layout as string ?? "default";
   categoryFilters.value = route.query.categoryFilters as string[] ?? null;
   tagFilters.value = route.query.tagFilters as string[] ?? null;
 });
