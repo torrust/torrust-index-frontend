@@ -87,7 +87,7 @@ const tags = useTags();
 const rest = useRestApi();
 
 const defaultPageSize = 50;
-const queryPageSize = parseInt(route.query?.pageSize as string, 10);
+const queryPageSize = isNaN(route.query?.pageSize) ? defaultPageSize : parseInt(route.query?.pageSize as string, 10);
 const pageSize: Ref<number> = ref(isNaN(queryPageSize) ? defaultPageSize : queryPageSize);
 const queryCategoryFilters = route.query?.categoryFilters as string[] || [];
 const categoryFilters: Ref<string[]> = ref(Array.isArray(queryCategoryFilters) ? queryCategoryFilters : [queryCategoryFilters]);
@@ -113,11 +113,19 @@ const selectedSorting = computed({
 watch(() => route.fullPath, () => {
   searchQuery.value = route.query.search as string ?? null;
   itemsSorting.value = route.query.sorting as string ?? null;
-  pageSize.value = route.query.pageSize as number ?? null;
-  currentPage.value = route.query.page as number ?? null;
+  pageSize.value = isNaN(route.query.pageSize) ? parseInt(route.query.pageSize) : defaultPageSize;
+  currentPage.value = isNaN(route.query.page) ? parseInt(route.query.page) : 1;
   layout.value = route.query.layout as string ?? null;
-  categoryFilters.value = route.query.categoryFilters as string[] ?? null;
-  tagFilters.value = route.query.tagFilters as string[] ?? null;
+
+  // Ensure categoryFilters is always an array of strings
+  categoryFilters.value = Array.isArray(route.query.categoryFilters)
+    ? route.query.categoryFilters as string[]
+    : (route.query.categoryFilters ? [route.query.categoryFilters as string] : []);
+
+  // Ensure tagFilters is always an array of strings
+  tagFilters.value = Array.isArray(route.query.tagFilters)
+    ? route.query.tagFilters as string[]
+    : (route.query.tagFilters ? [route.query.tagFilters as string] : []);
 });
 
 watch([searchQuery, itemsSorting, pageSize, currentPage, layout, categoryFilters, tagFilters], () => {
@@ -128,8 +136,8 @@ watch([searchQuery, itemsSorting, pageSize, currentPage, layout, categoryFilters
       pageSize: pageSize.value,
       page: currentPage.value,
       layout: layout.value,
-      categoryFilters: categoryFilters.value,
-      tagFilters: tagFilters.value
+      categoryFilters: categoryFilters.value.length > 0 ? categoryFilters.value : [],
+      tagFilters: tagFilters.value.length > 0 ? tagFilters.value : []
     }
   });
 
@@ -139,8 +147,8 @@ watch([searchQuery, itemsSorting, pageSize, currentPage, layout, categoryFilters
 onActivated(() => {
   searchQuery.value = route.query.search as string ?? null;
   itemsSorting.value = route.query.sorting as string ?? null;
-  pageSize.value = route.query.pageSize as number ?? null;
-  currentPage.value = route.query.page as number ?? null;
+  pageSize.value = route.query.pageSize as number ?? defaultPageSize;
+  currentPage.value = route.query.page as number ?? 1;
   layout.value = route.query.layout as string ?? null;
   categoryFilters.value = route.query.categoryFilters as string[] ?? null;
   tagFilters.value = route.query.tagFilters as string[] ?? null;
@@ -167,6 +175,15 @@ function submitSearch () {
 }
 
 function loadTorrents () {
+  const query = {
+    pageSize: pageSize.value,
+    page: currentPage.value,
+    sorting: itemsSorting.value,
+    categories: categoryFilters.value,
+    tags: tagFilters.value,
+    searchQuery: searchQuery.value
+  };
+
   rest.value.torrent.getTorrents(
     {
       pageSize: pageSize.value,
