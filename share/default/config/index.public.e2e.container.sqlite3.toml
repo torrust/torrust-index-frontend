@@ -15,11 +15,15 @@ threshold = "info"
 api_url = "http://tracker:1212"
 private = false
 url = "udp://tracker:6969"
+token = "MyAccessToken"
+
+[auth]
+user_claim_token_pepper = "MaxVerstappenWC2021"
 
 [database]
 connect_url = "sqlite:///var/lib/torrust/index/database/e2e_testing_sqlite3.db?mode=rwc"
 
-[mail]
+[mail.smtp]
 port = 1025
 server = "mailcatcher"
 
