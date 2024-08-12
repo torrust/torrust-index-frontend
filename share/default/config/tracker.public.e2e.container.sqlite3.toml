@@ -18,3 +18,6 @@ path = "/var/lib/torrust/tracker/database/e2e_testing_sqlite3.db"
 
 [http_api]
 bind_address = "0.0.0.0:1212"
+
+[http_api.access_tokens]
+admin = "MyAccessToken"
