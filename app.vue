@@ -12,7 +12,7 @@
     <div class="flex-grow" />
     <footer class="p-4 footer footer-center text-base-content">
       <div>
-        <p><a target="_blank" href="https://torrust.com" class="link link-hover"> Powered by Torrust </a> ⚡ <a target="_self" href="/license" class="link link-hover">Copyright © 2024</a></p>
+        <p><a target="_blank" href="https://torrust.com" class="link link-hover"> Powered by Torrust </a> ⚡ <a target="_self" href="/license" class="link link-hover">Copyright © 2024</a> &nbsp; <a target="_self" href="/terms" class="link link-hover">Terms</a></p>
       </div>
     </footer>
   </div>
