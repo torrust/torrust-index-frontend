@@ -146,6 +146,10 @@ __Contributors agree:__
 
 *We kindly ask you to take time and consider The Torrust Project [Contributor Agreement][agreement] in full.*
 
+## Disclaimer
+
+This software is provided solely for lawful purposes. Users must ensure compliance with all applicable laws and regulations regarding copyright and intellectual property. The developers of this software do not condone or support the use of this software for any illegal activities, including but not limited to the distribution of copyrighted, protected, or otherwise illegal content. By using this software, you agree to use it responsibly and in compliance with all legal requirements. Misuse of this software for illegal purposes may lead to legal consequences, for which the developers are not liable.
+
 ## Acknowledgments
 
 This project was a joint effort by [Nautilus Cyberneering GmbH][nautilus], [Dutch Bits][Dutch Bits] and collaborators. Thank you to you all!
