@@ -3,7 +3,7 @@ import { grantAdminRole, deleteUser } from "./cypress/e2e/contexts/user/tasks";
 import { deleteTorrent, deleteTorrentsInfoFromDatabase } from "./cypress/e2e/contexts/torrent/tasks";
 import { deleteCategory, addCategory } from "./cypress/e2e/contexts/category/tasks";
 import { deleteTags, addTag } from "./cypress/e2e/contexts/tag/tasks";
-import { DatabaseConfig } from "./cypress/e2e/common/database";
+import type { DatabaseConfig } from "./cypress/e2e/common/database";
 
 function databaseConfig (config: Cypress.PluginConfigOptions): DatabaseConfig {
   return {
