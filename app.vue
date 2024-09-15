@@ -1,5 +1,7 @@
 <template>
   <div class="flex flex-col" style="min-height: 100vh;">
+    <DemoBanner />
+
     <Notifications />
 
     <NavigationBar />
@@ -21,6 +23,7 @@
 <script setup lang="ts">
 import { getCategories, getSettings, getTags, getUser, onBeforeMount, onMounted } from "#imports";
 import Notifications from "~/components/Notifications.vue";
+import DemoBanner from "~/components/demo/Banner.vue";
 
 onBeforeMount(() => {
   getUser();
