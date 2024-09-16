@@ -44,7 +44,7 @@ describe("A registered user", () => {
     // the tags context.  We could even create some tags before running all the
     // tests.
     // cy.get("input[data-cy=\"upload-form-torrent-upload\"]").select('fractals');
-
+    cy.get("input[data-cy=\"upload-form-agree-terms\"]").check();
     cy.get("button[data-cy=\"upload-form-submit\"]").click();
 
     cy.get("@infohash").then((infohash) => {

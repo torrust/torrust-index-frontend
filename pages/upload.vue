@@ -41,6 +41,7 @@
           </div>
         </template>
       </div>
+
       <template v-if="categories?.length > 0">
         <div>
           <label for="category" class="px-2">Category</label>
@@ -53,6 +54,7 @@
           </select>
         </div>
       </template>
+
       <template v-if="tags?.length > 0">
         <div>
           <label for="tags" class="px-2">Tags</label>
@@ -67,14 +69,25 @@
       <div>
         <UploadFile sub-title="Only .torrent files allowed. BitTorrent v2 files are NOT supported." accept=".torrent" @on-change="setFile" />
       </div>
+
+      <!-- Checkbox for Terms and Conditions Agreement -->
+      <div>
+        <label for="agree-to-terms" class="px-2">Agreement</label>
+        <div class="mt-1">
+          <input v-model="agreeToTerms" name="agree-to-terms" type="checkbox" class="max-w-5" data-cy="upload-form-agree-terms">
+          <span class="px-2">I have read the <NuxtLink to="/terms" target="_blank">{{ contentUploadAgreement }}</NuxtLink>.</span>
+        </div>
+      </div>
+
       <template v-if="user?.username">
         <TorrustButton
           label="submit"
           data-cy="upload-form-submit"
-          :disabled="!formValid() || uploading"
+          :disabled="!formValid() || !agreeToTerms || uploading"
           @click="submitForm"
         />
       </template>
+
       <template v-else>
         <div class="relative flex justify-center text-sm">
           <NuxtLink to="/signin">
@@ -101,7 +114,7 @@ import {
   useTags,
   useUser
 } from "#imports";
-import { useCategories } from "~/composables/states";
+import { useCategories, useSettings } from "~/composables/states";
 
 type FormUploadTorrent = {
   title: string;
@@ -111,11 +124,13 @@ type FormUploadTorrent = {
   torrentFile: any;
 }
 
+const settings = useSettings();
 const categories = useCategories();
 const tags = useTags();
 const user = useUser();
 const rest = useRestApi();
 
+const agreeToTerms: Ref<boolean> = ref(false);
 const uploading: Ref<boolean> = ref(false);
 const descriptionView = ref("edit");
 const form: Ref<FormUploadTorrent> = ref({
@@ -125,11 +140,22 @@ const form: Ref<FormUploadTorrent> = ref({
   tags: [],
   torrentFile: ""
 });
+const contentUploadAgreement = ref("");
 
 onMounted(() => {
   getCategories();
   getTags();
 });
+
+watch(
+  () => settings.value,
+  (newSettings) => {
+    if (newSettings?.website?.terms?.upload?.content_upload_agreement) {
+      contentUploadAgreement.value = newSettings.website.terms.page.title;
+    }
+  },
+  { immediate: true }
+);
 
 function formValid () {
   return form.value.title && form.value.category && form.value.torrentFile;
