@@ -61,6 +61,10 @@ function closeBanner () {
   display: flex;
 }
 
+.feather {
+  align-self: center;
+}
+
 .feather:hover {
   stroke: rgb(255, 255, 255);
   stroke-opacity: 75%;
