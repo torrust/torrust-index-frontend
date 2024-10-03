@@ -120,6 +120,12 @@ Access to fetch at 'http://localhost:3001/v1/torrents?page_size=50&page=0&sort=U
 
 You need to enable the Cors layer with the permissive option setting the environment variable `TORRUST_INDEX_API_CORS_PERMISSIVE` to `true`.
 
+For example:
+
+```console
+TORRUST_INDEX_API_CORS_PERMISSIVE=true cargo run
+```
+
 ## Run the Index GUI
 
 Requirements:
@@ -169,6 +175,47 @@ npm run build && npm run preview
 ```
 
 More information about the [nuxt][nuxt] command can be found [here][nuxt_commands].
+
+### Working with Torrust Dependencies
+
+We have two internal dependencies:
+
+- [torrust-index-types-lib](https://github.com/torrust/torrust-index-types-lib): Basic TypeScript types for the Index API.
+- [torrust-index-api-lib](https://github.com/torrust/torrust-index-api-lib): A wrapper in TypeScript for the INdex API.
+
+Sometimes when the Index API changes, it might be useful to test the Index GUI with the new packages versions at the same time before releasing new versions for these packages. You could even be working on the Index API, the Index GUI and these packages at the same time if the feature requires changes in the API.
+
+There are two ways of using local packages with NPM:
+
+- [npm link](https://docs.npmjs.com/cli/v10/commands/npm-link).
+- [npm install](https://docs.npmjs.com/cli/v10/commands/npm-install).
+
+We will describe the `npm install` option.
+
+It's possible to install a local dependency by using its path:
+
+```console
+npm install --save ../torrust-index-api-lib
+npm install --save ../torrust-index-types-lib
+```
+
+After running those commands your `package.json` will have:
+
+```json
+{
+  "name": "torrust-index-gui",
+  "dependencies": {
+    "torrust-index-api-lib": "file:../torrust-index-api-lib",
+    "torrust-index-types-lib": "file:../torrust-index-types-lib",
+  }
+}
+```
+
+And your `node_modules` should have symbolic links for these packages.
+
+You can start changing any project. You will need to rebuild the dependency (`npm run build`) any time you make a change. If you are using `npm run dev` for the Index GUI you won't need to do anything else.
+
+> Warning: You can't push these changes in the `package.json`. Once you are done you have to release a new package version and update the `package.json`.
 
 ## Testing
 
