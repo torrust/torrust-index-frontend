@@ -1,10 +1,10 @@
-# Release Process Guide (v2.2.2)
+# Release Process (v1.0.0)
 
 ## Version
 
 > **The `[semantic version]` is bumped according to releases, new features, and breaking changes.**
 >
-> *The `develop` branch uses the (semantic version) suffix `-develop`.*
+> *The `main` branch uses the semantic version of the last released version.
 
 ## Process
 
@@ -21,79 +21,74 @@ git remote show torrust
 ...
 ```
 
-### 1. The `develop` branch is ready for a release
-
-The `develop` branch should have the version `[semantic version]-develop` that is ready to be released.
-
-### 2. Stage `develop` HEAD for merging into the `main` branch
+### 1. The `main` branch is ready for a release
 
 ```sh
-git fetch --all
-git push --force torrust develop:staging/main
+npm install && npm run lint && npm run build
 ```
 
-### 3. Create Release Commit
+There should be no errors installing or building the library.
+
+### 2. Change the version in the `package.json` file
+
+Change the version in the `package.json` file. For example `3.0.0`.
+
+You might need to update also the torrust dependencies:
+
+- torrust-index-api-lib
+- torrust-index-types-lib
 
 ```sh
-git stash
-git switch staging/main
-git reset --hard torrust/staging/main
-# change `[semantic version]-develop` to `[semantic version]`.
+npm update torrust-index-types-lib
+npm update torrust-index-api-lib
+```
+
+> NOTICE: The `v` prefix is not needed.
+
+Install and run linter and build to double-check:
+
+```sh
+npm install && npm run lint && npm run build
+```
+
+At this point, you should check that the new version is working wit the Index, before creating the tag.
+
+Commit the changes:
+
+```sh
 git add -A
-git commit -m "release: version [semantic version]"
-git push torrust
+git commit -m "feat: release [semantic version]"
 ```
 
-### 4. Create and Merge Pull Request from `staging/main` into `main` branch
-
-Pull request title format: "Release Version `[semantic version]`".
-
-This pull request merges the new version into the `main` branch.
-
-### 5. Push new version from `main` HEAD to `releases/v[semantic version]` branch
+### 3. Create a new tag an push to the remote
 
 ```sh
-git fetch --all
-git push torrust main:releases/v[semantic version]
+git tag v[semantic version]
+git push torrust && git push torrust v[semantic version]
 ```
 
-> **Check that the deployment is successful!**
-
-### 6. Create Release Tag
+For example:
 
 ```sh
-git switch releases/v[semantic version]
-git tag --sign v[semantic version]
-git push --tags torrust
+git tag v3.0.0
+git push torrust && git push torrust v3.0.0
 ```
 
-### 7. Create Release on Github from Tag
-
-This is for those who wish to download the source code.
-
-### 8. Stage `main` HEAD for merging into the `develop` branch
-
-Merge release back into the develop branch.
+### 4. Manually publish the NPM package
 
 ```sh
-git fetch --all
-git push --force torrust main:staging/develop
+npm publish
 ```
 
-### 9. Create Comment that bumps next development version
+> IMPORTANT:
+>
+> - You will require to login.
+> - You have to have permission for publishing on the Torrust namespace.
 
-```sh
-git stash
-git switch staging/develop
-git reset --hard torrust/staging/develop
-# change `[semantic version]` to `(next)[semantic version]-develop`.
-git add -A
-git commit -m "develop: bump to version (next)[semantic version]-develop"
-git push torrust
-```
+If you get an error because you were not logged in, just retry the same command after the login.
 
-### 10. Create and Merge Pull Request from `staging/develop` into `develop` branch.
+### 4. Check the package is published
 
-Pull request title format: "Version `[semantic version]` was Released".
+You should receive an email when the package is published.
 
-This pull request merges the new release into the `develop` branch and bumps the version number.
+You can also check on the NPM registry: <https://www.npmjs.com/package/torrust-index-gui>.
