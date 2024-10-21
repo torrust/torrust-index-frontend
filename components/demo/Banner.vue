@@ -1,8 +1,8 @@
 <template>
   <div v-if="isDemoMode" id="banner" class="demo-banner">
-    {{ warning }}<NuxtLink to="/terms">
-      Read our terms.</NuxtLink>
-    <svg
+    <div id="termsWarning"> {{ warning }}<NuxtLink to="/terms">
+      Read our terms.</NuxtLink></div>
+    <div id="closeButton"> <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
@@ -15,7 +15,7 @@
       class="feather feather-x cursor-pointer"
       @click="closeBanner()"
     ><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
-    </svg>
+    </svg></div>
   </div>
 </template>
 
@@ -51,18 +51,17 @@ function closeBanner () {
 .demo-banner {
   background-color: #f5b14a;
   color: #000;
-  width: 100%;
   padding: 10px;
   text-align: center;
-  /* position: fixed; */
-  top: 0;
-  left: 0;
+  width: 100%;
   z-index: 1000;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.feather {
-  align-self: center;
+#closeButton {
+padding-inline: 10px;
 }
 
 .feather:hover {
