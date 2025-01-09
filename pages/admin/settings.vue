@@ -41,7 +41,8 @@ import { onMounted, ref, useRestApi } from "#imports";
 const tabs = [
   "backend",
   "categories",
-  "tags"
+  "tags",
+  "users"
 ];
 
 const rest = useRestApi();
