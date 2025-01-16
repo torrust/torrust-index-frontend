@@ -1,4 +1,4 @@
-import type { PublicSettings, Category, TokenResponse, TorrentTag } from "torrust-index-types-lib";
+import type { PublicSettings, Category, TokenResponse, TorrentTag, UserProfile } from "torrust-index-types-lib";
 import { Rest } from "torrust-index-api-lib";
 import { notify } from "notiwind-ts";
 import { useRuntimeConfig, useState } from "#imports";
@@ -8,6 +8,7 @@ export const useCategories = () => useState<Array<Category>>("categories", () =>
 export const useTags = () => useState<Array<TorrentTag>>("tags", () => new Array<TorrentTag>());
 export const useSettings = () => useState<PublicSettings>("public-settings", () => null);
 export const useUser = () => useState<TokenResponse>("user", () => null);
+export const useUserProfiles = () => useState<Array<UserProfile>>("user-profiles", () => new Array<UserProfile>());
 
 export function getSettings () {
   useRestApi().value.settings.getPublicSettings()
@@ -91,6 +92,20 @@ export async function getUser () {
         group: "error",
         title: "Error",
         text: `Trying to get user info. ${err.message}.`
+      }, 10000);
+    });
+}
+
+export function getUserProfiles () {
+  useRestApi().value.user.getUserProfiles()
+    .then((res) => {
+      useUserProfiles().value = res;
+    })
+    .catch((err) => {
+      notify({
+        group: "error",
+        title: "Error",
+        text: `Trying to get user profiles. ${err.message}.`
       }, 10000);
     });
 }
