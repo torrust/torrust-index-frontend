@@ -1,77 +1,22 @@
 <template>
   <div class="flex flex-col max-w-md gap-2 mx-auto">
     <div class="flex flex-col gap-2">
-      <template v-for="category in categories">
+      <!--     <template v-for="userProfile in userProfiles">
         <div class="flex justify-between p-2 rounded bg-base-100">
-          <span class="text-base-content">{{ category.name }} ({{ category.num_torrents }})</span>
-          <button :data-cy="getDeleteButtonDataCy(category.name)" class="text-error-content hover:text-error" @click="deleteCategory(category.name)">
-            Delete
-          </button>
+          <span class="text-base-content">{{ userProfile.username }} ({{ userProfile.email }})</span>
         </div>
-      </template>
-    </div>
-    <div class="flex gap-2">
-      <input v-model="newCategory" data-cy="add-category-input" class="w-full input input-bordered" type="text">
-      <button data-cy="add-category-button" class="btn btn-primary" :class="{ 'loading': addingCategory }" :disabled="addingCategory || !newCategory" @click="addCategory">
-        Add category
-      </button>
+      </template> -->
+      <UserTable :user-profiles="userProfiles" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { notify } from "notiwind-ts";
-import { getCategories, useCategories, useRestApi } from "#imports";
+import { getUserProfiles, useUserProfiles } from "#imports";
 
-const categories = useCategories();
-const rest = useRestApi().value;
-
-const newCategory = ref("");
-const addingCategory = ref(false);
+const userProfiles = useUserProfiles();
 
 onBeforeMount(() => {
-  getCategories();
+  getUserProfiles();
 });
-
-function getDeleteButtonDataCy (name: string) {
-  return "delete-category-" + name.toLowerCase().replace(/ /g, "-");
-}
-
-function addCategory () {
-  if (newCategory.value) {
-    addingCategory.value = true;
-
-    rest.category.addCategory(newCategory.value)
-      .then(() => {
-        getCategories();
-      })
-      .catch((err) => {
-        notify({
-          group: "error",
-          title: "Error",
-          text: `Trying to add the category. ${err.message}.`
-        }, 10000);
-      })
-      .finally(() => {
-        addingCategory.value = false;
-      });
-  }
-}
-
-function deleteCategory (category: string) {
-  if (confirm(`Are you sure you want to delete ${category}?`)) {
-    rest.category.deleteCategory(category)
-      .then(() => {
-        getCategories();
-      })
-      .catch((err) => {
-        notify({
-          group: "error",
-          title: "Error",
-          text: `Trying to delete the category. ${err.message}.`
-        }, 10000);
-      });
-  }
-}
 </script>
