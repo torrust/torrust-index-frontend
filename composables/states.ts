@@ -1,4 +1,4 @@
-import type { PublicSettings, Category, TokenResponse, TorrentTag, UserProfile } from "torrust-index-types-lib";
+import type { PublicSettings, Category, TokenResponse, TorrentTag } from "torrust-index-types-lib";
 import { Rest } from "torrust-index-api-lib";
 import { notify } from "notiwind-ts";
 import { useRuntimeConfig, useState } from "#imports";

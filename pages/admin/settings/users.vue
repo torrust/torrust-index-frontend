@@ -11,7 +11,7 @@
 import type { Ref } from "vue";
 import { notify } from "notiwind-ts";
 import type { UserProfile } from "torrust-index-types-lib";
-import { computed, onMounted, ref, useTags, watch } from "#imports";
+import { onMounted, ref, watch } from "#imports";
 import { useRestApi } from "~/composables/states";
 
 const route = useRoute();
@@ -51,11 +51,6 @@ onMounted(() => {
 });
 
 function loadUserProfiles () {
-  const query = {
-    pageSize: pageSize.value,
-    page: currentPage.value
-  };
-
   rest.value.user.getUserProfiles(
     {
       pageSize: pageSize.value,
