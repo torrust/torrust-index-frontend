@@ -128,13 +128,30 @@ watch(() => route.fullPath, () => {
     : (route.query.tagFilters ? [route.query.tagFilters as string] : []);
 });
 
-watch([searchQuery, itemsSorting, pageSize, currentPage, layout, categoryFilters, tagFilters], () => {
+watch([searchQuery, itemsSorting, currentPage, layout, categoryFilters, tagFilters], () => {
   router.push({
     query: {
       search: searchQuery.value,
       sorting: itemsSorting.value ? itemsSorting.value : sortingOptions[0].value,
       pageSize: pageSize.value,
       page: currentPage.value,
+      layout: layout.value,
+      categoryFilters: categoryFilters.value.length > 0 ? categoryFilters.value : [],
+      tagFilters: tagFilters.value.length > 0 ? tagFilters.value : []
+    }
+  });
+
+  loadTorrents();
+});
+
+// Resets the current page value to 1 when the page size is changed to display results correctly
+watch(pageSize, () => {
+  router.push({
+    query: {
+      search: searchQuery.value,
+      sorting: itemsSorting.value ? itemsSorting.value : sortingOptions[0].value,
+      pageSize: pageSize.value,
+      page: 1,
       layout: layout.value,
       categoryFilters: categoryFilters.value.length > 0 ? categoryFilters.value : [],
       tagFilters: tagFilters.value.length > 0 ? tagFilters.value : []
