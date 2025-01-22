@@ -175,15 +175,6 @@ function submitSearch () {
 }
 
 function loadTorrents () {
-  const query = {
-    pageSize: pageSize.value,
-    page: currentPage.value,
-    sorting: itemsSorting.value,
-    categories: categoryFilters.value,
-    tags: tagFilters.value,
-    searchQuery: searchQuery.value
-  };
-
   rest.value.torrent.getTorrents(
     {
       pageSize: pageSize.value,
