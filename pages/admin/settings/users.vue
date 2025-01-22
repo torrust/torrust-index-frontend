@@ -30,11 +30,23 @@ watch(() => route.fullPath, () => {
   pageSize.value = isNaN(route.query.pageSize) ? defaultPageSize : parseInt(route.query.pageSize);
 });
 
-watch([pageSize, currentPage], () => {
+watch(currentPage, () => {
   router.push({
     query: {
       pageSize: pageSize.value,
       page: currentPage.value
+    }
+  });
+
+  loadUserProfiles();
+});
+
+// Resets the current page value to 1 when the page size is changed to display results correctly
+watch(pageSize, () => {
+  router.push({
+    query: {
+      pageSize: pageSize.value,
+      page: 1
     }
   });
 
