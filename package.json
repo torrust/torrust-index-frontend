@@ -1,6 +1,6 @@
 {
   "name": "torrust-index-gui",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "The frontend for the Torrust Index project.",
   "repository": {
     "type": "git",
