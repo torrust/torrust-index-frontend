@@ -1,12 +1,12 @@
 <template>
   <div class="flex flex-col max-w-md gap-2 mx-auto">
     <div class="flex flex-col gap-2">
-      <div class="flex flex-wrap gap-2">
+      <div class="pl-1 flex flex-wrap gap-2">
         <input
           v-model="searchQuery"
           name="search"
           type="text"
-          class="py-2 border-2 input input-bordered rounded-2xl placeholder-neutral-content"
+          class="h-8 border-2 input input-bordered rounded-2xl placeholder-neutral-content"
           :placeholder="`Filter by username`"
         >
 
