@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col max-w-md gap-2 mx-auto">
     <div class="flex flex-col gap-2">
-      <div class="pl-1 flex flex-wrap gap-2">
+      <div class="pl-0.5 flex flex-wrap gap-2">
         <input
           v-model="searchQuery"
           name="search"
